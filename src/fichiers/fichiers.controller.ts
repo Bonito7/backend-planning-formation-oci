@@ -8,6 +8,7 @@ import {
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { FichiersService } from "./fichiers.service";
 import { multerConfig } from "../common/config/multer.config";
+import { Express } from "express";
 
 @Controller("fichiers")
 export class FichiersController {
