@@ -12,10 +12,17 @@ async function bootstrap() {
   // Middleware pour servir les fichiers uploadés
   app.use("/uploads", express.static(join(__dirname, "..", "uploads")));
 
-  // CORS pour le frontend
+  // CORS pour le frontend (PRODUCTION)
   app.enableCors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      "https://formation-planning-oci.netlify.app", // VOTRE FRONTEND NETLIFY
+      "https://backend-planning-formation-oci.onrender.com", // VOTRE BACKEND RENDER (si nécessaire)
+    ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
   });
 
   // Validation globale
@@ -31,5 +38,6 @@ async function bootstrap() {
   console.log(`🚀 Backend démarré sur http://localhost:${port}`);
   console.log(`📁 Uploads disponibles sur http://localhost:${port}/uploads`);
   console.log(`🗄️  Connecté à MongoDB Atlas`);
+  console.log(`🌐 CORS autorisé pour: formation-planning-oci.netlify.app`);
 }
 bootstrap();
